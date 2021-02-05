@@ -10,12 +10,15 @@ export default
       type: Object,
       default: () => ({
 
-        'HasOne': [],
-        'BelongsTo': [],
-        'HasMany':[],
-        'HasManyBy':[],
-        'BelongsToMany':[],
-        'HasManyThrough':[]
+        HasOne:{},
+        BelongsTo:{},
+        HasMany:{
+          path: '',
+          where:'',
+        },
+        HasManyBy:{},
+        BelongsToMany:{},
+        HasManyThrough:{}
         // todo Polymorphic...
       })
     },
@@ -35,7 +38,7 @@ export default
           console.log(key, 'is an Attr');
           break;
 
-          case field.constructor.name == 'HasMany':
+          case field.constructor.name == 'HasMany' && _.size(this.relatedBehaviour.HasMany) > 0:
           console.log(key, 'is instance of HasMany')
           console.log(field);
           console.log(field.related.crud());
